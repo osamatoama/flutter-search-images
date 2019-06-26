@@ -49,25 +49,7 @@ class _HomePageState extends State<HomePage> {
                 controller: _searchInputController,
                 textInputAction: TextInputAction.search,
                 onSubmitted: (String value) async {
-                  if (_searchInputController.text == null ||
-                      _searchInputController.text.isEmpty) {
-                    Toast.show("search keyword can't be null", context,
-                        duration: 5, gravity: Toast.TOP);
-                    return;
-                  }
-                  _triggerLoading(true);
-                  var data = await getPics(_searchInputController.text);
-                  _triggerLoading(false);
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ResultsPage(
-                            _searchInputController.text, data['hits'])),
-                  );
-
-                  setState(() {
-                    _searchInputController.text = '';
-                  });
+                  search();
                 },
                 decoration: InputDecoration(
                     labelText: 'looking for...',
@@ -83,6 +65,36 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void search() async {
+    if (_searchInputController.text == null ||
+        _searchInputController.text.isEmpty) {
+      Toast.show("search keyword can't be null", context,
+          duration: 5, gravity: Toast.TOP);
+      return;
+    }
+    _triggerLoading(true);
+    var data = await getPics(_searchInputController.text);
+    if (data['hits'].isEmpty) {
+      Toast.show(
+          "No search results found for ${_searchInputController.text}", context,
+          duration: 5, gravity: Toast.TOP);
+      _triggerLoading(false);
+      return;
+    }
+
+    _triggerLoading(false);
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              ResultsPage(_searchInputController.text, data['hits'])),
+    );
+
+    setState(() {
+      _searchInputController.text = '';
+    });
   }
 }
 
