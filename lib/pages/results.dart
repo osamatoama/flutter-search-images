@@ -26,9 +26,10 @@ class _ResultsPageState extends State<ResultsPage> {
       child: Hero(
         tag: imagePath,
         child: FadeInImage.assetNetwork(
+          fadeInCurve: Curves.easeInCubic,
           placeholder: 'images/loading.gif',
           image: imagePath,
-          fit: BoxFit.cover,
+          fit: BoxFit.fill,
         ),
       ),
     );

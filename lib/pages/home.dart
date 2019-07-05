@@ -7,8 +7,6 @@ import 'dart:async';
 import 'package:toast/toast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-// todo:
-// save all searchs
 class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
