@@ -29,7 +29,7 @@ class _ResultsPageState extends State<ResultsPage> {
           fadeInCurve: Curves.easeInCubic,
           placeholder: 'images/loading.gif',
           image: imagePath,
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
         ),
       ),
     );
