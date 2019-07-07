@@ -6,3 +6,5 @@ A flutter app to search images through pixabay API.
  
  
  ![](images/01.png)
+___
+ ![](images/02.png)
